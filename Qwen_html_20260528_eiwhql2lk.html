@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一站式供應鏈透明化治理平台 - 核心模組演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .module-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 25px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .module-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.5s;
+        }
+
+        .module-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-header {
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .module-header h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .module-header p {
+            color: #666;
+        }
+
+        .demo-section {
+            margin-bottom: 30px;
+        }
+
+        .demo-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+        .data-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            margin-top: 15px;
+        }
+
+        .traceability-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tree-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            position: relative;
+            margin-left: 30px;
+        }
+
+        .tree-node::before {
+            content: "▸";
+            position: absolute;
+            left: -25px;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+
+        .tree-node.supplier {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tree-node.manufacturer {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .tree-node.retailer {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .risk-indicator {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .risk-low {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .risk-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .risk-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #0c5460;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #856404;
+            color: #856404;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #155724;
+            color: #155724;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        .timeline-item.completed::before {
+            background: #28a745;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .qr-code-demo {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @media print {
+            body { background: white; }
+            .module-tabs { display: none; }
+            .module-content { display: block !important; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 一站式供應鏈透明化治理平台</h1>
+            <p>四大核心模組互動演示系統</p>
+        </div>
+
+        <div class="module-tabs">
+            <button class="tab-btn active" onclick="showModule('module1')">
+                📍 模組一：原產地全生命週期溯源
+            </button>
+            <button class="tab-btn" onclick="showModule('module2')">
+                👥 模組二：供應鏈人權盡職調查
+            </button>
+            <button class="tab-btn" onclick="showModule('module3')">
+                🌱 模組三：全鏈路碳排放核算
+            </button>
+            <button class="tab-btn" onclick="showModule('module4')">
+                ⚖️ 模組四：全球貿易法規合規
+            </button>
+        </div>
+
+        <!-- 模組一：原產地溯源 -->
+        <div id="module1" class="module-content active">
+            <div class="module-header">
+                <h2>📍 原產地全生命週期溯源模塊</h2>
+                <p>從原材料開採到最終消費者的全鏈路不可篡改追溯</p>
+            </div>
+
+            <div class="demo-section">
+                <h3>核心功能演示</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔗 區塊鏈溯源</h4>
+                        <p>每一批次產品對應唯一追溯碼，所有環節數據實時上鏈，確保不可篡改</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🌍 原產地規則庫</h4>
+                        <p>內建全球海關原產地規則，自動匹配目標市場標準</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🏷️ 地理標誌保護</h4>
+                        <p>專屬區域邊界認證，杜絕仿冒，保護地理標誌產品</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 消費端查詢</h4>
+                        <p>掃碼即可查看全鏈路原產地信息，提升消費者信任</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎯 實時操作演示：有機棉T恤溯源</h3>
+                <div class="demo-controls">
+                    <button class="btn" onclick="traceProduct()">🔍 開始溯源追蹤</button>
+                    <button class="btn btn-secondary" onclick="generateQR()">📱 生成追溯碼</button>
+                    <button class="btn btn-secondary" onclick="verifyOrigin()">✅ 驗證原產地</button>
+                </div>
+
+                <div id="traceResult" class="data-display" style="display:none;">
+                    <h4>產品追溯路徑 (批次號: TX-2026-0528-001)</h4>
+                    <div class="traceability-tree">
+                        <div class="tree-node">
+                            <strong>🌾 原材料階段 - 有機棉農場</strong><br>
+                            地點：印度古吉拉特邦 | 時間：2026-01-15<br>
+                            認證：GOTS有機認證 | 區塊鏈哈希：0x7f8a9b...
+                        </div>
+                        <div class="tree-node supplier">
+                            <strong>🏭 紡紗廠</strong><br>
+                            地點：印度孟買 | 時間：2026-02-10<br>
+                            加工：棉花→紗線 | 能耗數據已上鏈
+                        </div>
+                        <div class="tree-node manufacturer">
+                            <strong>✂️ 成衣製造廠</strong><br>
+                            地點：孟加拉達卡 | 時間：2026-03-20<br>
+                            工序：紡織→染色→裁剪→縫製<br>
+                            社會合規：BSCI認證 ✅
+                        </div>
+                        <div class="tree-node retailer">
+                            <strong>🏪 品牌倉儲 & 零售</strong><br>
+                            地點：台灣台北 | 時間：2026-05-01<br>
+                            狀態：已上架銷售 | 碳足跡：2.3kg CO2e
+                        </div>
+                    </div>
+
+                    <div class="stats-grid" style="margin-top:20px;">
+                        <div class="stat-card">
+                            <div class="number">100%</div>
+                            <div class="label">原產地真實性</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">4</div>
+                            <div class="label">供應鏈環節</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">12</div>
+                            <div class="label">區塊鏈記錄</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">2.3kg</div>
+                            <div class="label">產品碳足跡</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="qrDisplay" style="display:none; text-align:center; margin-top:20px;">
+                    <h4>產品追溯QR Code</h4>
+                    <div class="qr-code-demo">
+                        <div>
+                            <div style="font-size:3em;">📱</div>
+                            <div>掃描查詢完整溯源信息</div>
+                            <div style="font-size:0.8em; margin-top:10px;">TX-2026-0528-001</div>
+                        </div>
+                    </div>
+                    <p style="color:#666;">消費者掃描後可查看：原產地證明、生產過程、碳足跡、社會合規報告</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 社會價值：</strong>杜絕原產地造假，維護市場公平競爭，保障消費者知情權，協助企業規避原產地不合規導致的關稅與禁令風險
+            </div>
+        </div>
+
+        <!-- 模組二：人權盡職調查 -->
+        <div id="module2" class="module-content">
+            <div class="module-header">
+                <h2>👥 供應鏈人權盡職調查與風險管理模塊</h2>
+                <p>穿透供應鏈黑箱，守護勞工人權，杜絕強迫勞動與童工</p>
+            </div>
+
+            <div class="demo-section">
+                <h3>核心功能演示</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📋 標準化盡職調查</h4>
+                        <p>整合ILO核心公約、UFLPA等全球標準，形成標準化檢查清單</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚠️ 實時風險預警</h4>
+                        <p>多層級供應商風險實時監控，AI輿情識別潛在風險</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 匿名舉報通道</h4>
+                        <p>勞工匿名反饋加密通道，直接觸達基層，杜絕打壓報復</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 閉環整改管理</h4>
+                        <p>風險整改全閉環管理，留存不可篡改的盡職調查證據鏈</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎯 實時操作演示：供應商人權風險評估</h3>
+                <div class="demo-controls">
+                    <button class="btn" onclick="runRiskAssessment()">🔍 執行風險評估</button>
+                    <button class="btn btn-secondary" onclick="showAnonymousReport()">📮 查看匿名舉報</button>
+                    <button class="btn btn-secondary" onclick="generateAuditReport()">📄 生成審計報告</button>
+                </div>
+
+                <div id="riskDashboard" class="data-display" style="display:none;">
+                    <h4>供應鏈人權風險儀表板</h4>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="number">156</div>
+                            <div class="label">供應商總數</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">12</div>
+                            <div class="label">高風險供應商</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">34</div>
+                            <div class="label">中風險供應商</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">98%</div>
+                            <div class="label">合規率</div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top:20px;">高風險供應商清單</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>供應商名稱</th>
+                                <th>所在國家</th>
+                                <th>風險類型</th>
+                                <th>風險等級</th>
+                                <th>狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>XX紡織有限公司</td>
+                                <td>孟加拉</td>
+                                <td>工時超標、薪資延遲</td>
+                                <td><span class="badge badge-danger">高風險</span></td>
+                                <td>整改中</td>
+                            </tr>
+                            <tr>
+                                <td>YY製衣廠</td>
+                                <td>柬埔寨</td>
+                                <td>安全設施不足</td>
+                                <td><span class="badge badge-warning">中風險</span></td>
+                                <td>待審核</td>
+                            </tr>
+                            <tr>
+                                <td>ZZ印染廠</td>
+                                <td>越南</td>
+                                <td>環保違規</td>
+                                <td><span class="badge badge-warning">中風險</span></td>
+                                <td>已整改</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="margin-top:20px;">AI風險預警 (最近7天)</h4>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ 預警 #2026-0527：</strong>監測到孟加拉某供應商所在地區發生勞工抗議事件，建議啟動緊急盡職調查
+                    </div>
+                    <div class="alert alert-success">
+                        <strong>✅ 已解決 #2026-0520：</strong>柬埔寨供應商已完成安全設施整改，第三方驗證通過
+                    </div>
+                </div>
+
+                <div id="anonymousReport" class="data-display" style="display:none;">
+                    <h4>🔒 勞工匿名舉報通道 (加密保護)</h4>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <h4>舉報 #AR-2026-001</h4>
+                            <p><strong>時間：</strong>2026-05-25 14:30<br>
+                            <strong>工廠：</strong>XX紡織廠 (已匿名化)<br>
+                            <strong>內容：</strong>反映加班時間超過法定上限，且未支付加班費<br>
+                            <strong>狀態：</strong> <span class="badge badge-success">已處理</span></p>
+                            <p><strong>處理結果：</strong>已啟動調查，確認違規事實，要求工廠補發加班費並調整工時制度</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>舉報 #AR-2026-002</h4>
+                            <p><strong>時間：</strong>2026-05-27 09:15<br>
+                            <strong>工廠：</strong>YY製衣廠 (已匿名化)<br>
+                            <strong>內容：</strong>宿舍條件惡劣，衛生設施不足<br>
+                            <strong>狀態：</strong> <span class="badge badge-warning">調查中</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 社會價值：</strong>穿透供應鏈黑箱，從被動合規轉向主動勞工權益保護，杜絕強迫勞動、童工等人權侵害，協助企業符合全球人權監管要求
+            </div>
+        </div>
+
+        <!-- 模組三：碳排放核算 -->
+        <div id="module3" class="module-content">
+            <div class="module-header">
+                <h2>🌱 全鏈路碳排放核算與減排管理模塊</h2>
+                <p>覆蓋範圍1、2、3全口徑碳排，精準核算，智能減排</p>
+            </div>
+
+            <div class="demo-section">
+                <h3>核心功能演示</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📊 全口徑核算</h4>
+                        <p>覆蓋範圍1、2、3碳排放，穿透至供應鏈全環節，數據上鏈不可篡改</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 科學碳目標</h4>
+                        <p>協助企業設定SBTi目標，AI識別高碳排環節，提供減排方案</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📑 自動報告生成</h4>
+                        <p>自動生成符合CBAM、ISO14064標準的報告，對接監管申報</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🏷️ 產品碳足跡</h4>
+                        <p>單產品碳足跡與追溯碼綁定，實現消費端可視化</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎯 實時操作演示：產品碳足跡計算</h3>
+                <div class="demo-controls">
+                    <button class="btn" onclick="calculateCarbon()">🧮 計算碳足跡</button>
+                    <button class="btn btn-secondary" onclick="showReductionPlan()">💡 查看減排方案</button>
+                    <button class="btn btn-secondary" onclick="generateCBAMReport()">📄 生成CBAM報告</button>
+                </div>
+
+                <div id="carbonDashboard" class="data-display" style="display:none;">
+                    <h4>產品碳足跡分析 (有機棉T恤)</h4>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="number">2.3</div>
+                            <div class="label">kg CO2e/件</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">45%</div>
+                            <div class="label">範圍3排放佔比</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">-15%</div>
+                            <div class="label">較去年減排</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">A</div>
+                            <div class="label">碳效率等級</div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top:20px;">碳排放分解 (全生命週期)</h4>
+                    <div style="margin:15px 0;">
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>原材料生產 (棉花種植)</span>
+                                <span>0.8 kg CO2e (35%)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:35%">35%</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>紡紗與織布</span>
+                                <span>0.6 kg CO2e (26%)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:26%">26%</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>染色與後整理</span>
+                                <span>0.5 kg CO2e (22%)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:22%">22%</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>成衣製造</span>
+                                <span>0.3 kg CO2e (13%)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:13%">13%</div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom:10px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                                <span>運輸與物流</span>
+                                <span>0.1 kg CO2e (4%)</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width:4%">4%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top:20px;">區塊鏈碳數據記錄</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>環節</th>
+                                <th>碳排放量</th>
+                                <th>數據來源</th>
+                                <th>上鏈時間</th>
+                                <th>驗證狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>棉花種植</td>
+                                <td>0.8 kg CO2e</td>
+                                <td>IoT傳感器 + 農場記錄</td>
+                                <td>2026-01-15</td>
+                                <td><span class="badge badge-success">已驗證</span></td>
+                            </tr>
+                            <tr>
+                                <td>紡紗</td>
+                                <td>0.35 kg CO2e</td>
+                                <td>電表數據 + 生產記錄</td>
+                                <td>2026-02-10</td>
+                                <td><span class="badge badge-success">已驗證</span></td>
+                            </tr>
+                            <tr>
+                                <td>染色</td>
+                                <td>0.5 kg CO2e</td>
+                                <td>能源管理系統</td>
+                                <td>2026-03-05</td>
+                                <td><span class="badge badge-success">已驗證</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="reductionPlan" class="data-display" style="display:none;">
+                    <h4> AI智能減排方案建議</h4>
+                    <div class="timeline">
+                        <div class="timeline-item completed">
+                            <h4>方案1：使用可再生能源</h4>
+                            <p><strong>實施環節：</strong>染色與後整理<br>
+                            <strong>預期減排：</strong>0.25 kg CO2e/件 (11%)<br>
+                            <strong>投資成本：</strong>NT$ 500,000<br>
+                            <strong>回報期：</strong>3.2年<br>
+                            <strong>狀態：</strong> <span class="badge badge-success">已實施</span></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>方案2：優化物流路線</h4>
+                            <p><strong>實施環節：</strong>運輸與物流<br>
+                            <strong>預期減排：</strong>0.05 kg CO2e/件 (2%)<br>
+                            <strong>投資成本：</strong>NT$ 100,000<br>
+                            <strong>回報期：</strong>1.5年<br>
+                            <strong>狀態：</strong> <span class="badge badge-warning">規劃中</span></p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>方案3：採用有機染料</h4>
+                            <p><strong>實施環節：</strong>染色工藝<br>
+                            <strong>預期減排：</strong>0.15 kg CO2e/件 (6.5%)<br>
+                            <strong>投資成本：</strong>NT$ 300,000<br>
+                            <strong>回報期：</strong>4年<br>
+                            <strong>狀態：</strong> <span class="badge badge-warning">評估中</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 社會價值：</strong>推動供應鏈全鏈路碳減排，協助企業應對全球碳中和監管，規避碳關稅風險，助力國家與企業碳中和目標達成
+            </div>
+        </div>
+
+        <!-- 模組四：貿易法規合規 -->
+        <div id="module4" class="module-content">
+            <div class="module-header">
+                <h2>⚖️ 全球貿易法規合規管理模塊</h2>
+                <p>實時同步全球法規，自動筛查風險，降低合規成本</p>
+            </div>
+
+            <div class="demo-section">
+                <h3>核心功能演示</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📚 全球法規庫</h4>
+                        <p>每日同步各國原產地規則、制裁清單、進出口管制、環保禁令</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔍 自動風險筛查</h4>
+                        <p>全鏈路合規風險自動筛查，實時預警制裁、禁令、關稅風險</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📁 合規文件管理</h4>
+                        <p>合規文件加密上鏈，形成完整證據鏈，一鍵生成清關文件</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔔 新法規預警</h4>
+                        <p>新法規預警與定製化應對方案、線上培訓</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>🎯 實時操作演示：貿易合規檢查</h3>
+                <div class="demo-controls">
+                    <button class="btn" onclick="checkCompliance()">🔍 執行合規檢查</button>
+                    <button class="btn btn-secondary" onclick="showRegulationUpdates()">📢 查看法規更新</button>
+                    <button class="btn btn-secondary" onclick="generateCustomsDoc()">📄 生成清關文件</button>
+                </div>
+
+                <div id="complianceDashboard" class="data-display" style="display:none;">
+                    <h4>貿易合規風險檢查報告</h4>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="number">156</div>
+                            <div class="label">法規條目檢查</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">3</div>
+                            <div class="label">風險警示</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">98%</div>
+                            <div class="label">合規率</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number">A+</div>
+                            <div class="label">合規等級</div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top:20px;">⚠️ 風險警示清單</h4>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ UFLPA合規風險 (中等)</strong><br>
+                        供應商XX位於新疆地區，需補充提供完整供應鏈盡職調查文件，證明不涉及強迫勞動<br>
+                        <strong>建議行動：</strong>提交第三方審核報告、勞工合同、工資支付記錄
+                    </div>
+                    <div class="alert alert-warning">
+                        <strong>⚠️ CBAM碳關稅風險 (低)</strong><br>
+                        產品碳足跡為2.3kg CO2e，低於歐盟同類產品平均值，但需準備完整碳核算報告<br>
+                        <strong>建議行動：</strong>準備ISO14064認證報告
+                    </div>
+                    <div class="alert alert-success">
+                        <strong>✅ 原產地規則合規</strong><br>
+                        產品符合RCEP原產地規則，可享受關稅優惠<br>
+                        <strong>優惠幅度：</strong>關稅從8%降至0%
+                    </div>
+
+                    <h4 style="margin-top:20px;">📋 合規文件清單</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>文件名稱</th>
+                                <th>適用法規</th>
+                                <th>有效期</th>
+                                <th>狀態</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>原產地證明書</td>
+                                <td>RCEP</td>
+                                <td>2026-12-31</td>
+                                <td><span class="badge badge-success">有效</span></td>
+                                <td><button class="btn" style="padding:5px 10px; font-size:0.85em;">下載</button></td>
+                            </tr>
+                            <tr>
+                                <td>社會合規審計報告</td>
+                                <td>UFLPA/CSDDD</td>
+                                <td>2026-08-15</td>
+                                <td><span class="badge badge-warning">即將到期</span></td>
+                                <td><button class="btn" style="padding:5px 10px; font-size:0.85em;">更新</button></td>
+                            </tr>
+                            <tr>
+                                <td>碳足跡驗證報告</td>
+                                <td>CBAM</td>
+                                <td>2027-01-31</td>
+                                <td><span class="badge badge-success">有效</span></td>
+                                <td><button class="btn" style="padding:5px 10px; font-size:0.85em;">下載</button></td>
+                            </tr>
+                            <tr>
+                                <td>GOTS有機認證</td>
+                                <td>歐盟進口要求</td>
+                                <td>2026-11-30</td>
+                                <td><span class="badge badge-success">有效</span></td>
+                                <td><button class="btn" style="padding:5px 10px; font-size:0.85em;">下載</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="regulationUpdates" class="data-display" style="display:none;">
+                    <h4>📢 最新法規更新 (2026年5月)</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>歐盟CSDDD實施細則發布</h4>
+                            <p><strong>發布日期：</strong>2026-05-20<br>
+                            <strong>生效日期：</strong>2026-07-01<br>
+                            <strong>影響範圍：</strong>年營收超過€4.5億的企業<br>
+                            <strong>主要內容：</strong>明確供應鏈人權與環境盡職調查義務，違規最高可處全球營業額5%罰款<br>
+                            <strong>應對建議：</strong>立即啟動供應鏈盡職調查體系升級</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>美國UFLPA實體清單更新</h4>
+                            <p><strong>發布日期：</strong>2026-05-15<br>
+                            <strong>生效日期：</strong>立即生效<br>
+                            <strong>新增實體：</strong>12家紡織與電子企業<br>
+                            <strong>影響：</strong>涉及這些實體的產品禁止進口美國<br>
+                            <strong>應對建議：</strong>立即筛查供應商名單，避免使用清單企業產品</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>CBAM過渡期報告要求調整</h4>
+                            <p><strong>發布日期：</strong>2026-05-10<br>
+                            <strong>生效日期：</strong>2026-06-01<br>
+                            <strong>調整內容：</strong>簡化過渡期報告格式，但要求更詳細的範圍3排放數據<br>
+                            <strong>應對建議：</strong>更新碳核算系統，加強供應鏈碳數據收集</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>💡 社會價值：</strong>降低企業跨國貿易合規成本，尤其是中小微企業合規門檻，減少貿易摩擦與損失，維護全球貿易公平透明
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模組切換功能
+        function showModule(moduleId) {
+            // 隱藏所有模組
+            document.querySelectorAll('.module-content').forEach(module => {
+                module.classList.remove('active');
+            });
+            
+            // 取消所有按鈕激活狀態
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 顯示選中的模組
+            document.getElementById(moduleId).classList.add('active');
+            
+            // 激活對應按鈕
+            event.target.classList.add('active');
+        }
+
+        // 模組一功能
+        function traceProduct() {
+            document.getElementById('traceResult').style.display = 'block';
+            alert('✅ 溯源追蹤完成！\n\n已顯示從原材料到零售的完整供應鏈路徑\n所有數據均已上鏈，不可篡改');
+        }
+
+        function generateQR() {
+            document.getElementById('qrDisplay').style.display = 'block';
+            alert('📱 QR Code已生成！\n\n消費者掃描後可查看：\n- 原產地證明\n- 生產過程記錄\n- 碳足跡信息\n- 社會合規報告');
+        }
+
+        function verifyOrigin() {
+            alert('✅ 原產地驗證通過！\n\n驗證結果：\n- 有機棉產地：印度古吉拉特邦 ✓\n- GOTS認證：有效 ✓\n- 區塊鏈記錄：12條完整記錄 ✓\n- 原產地真實性：100%');
+        }
+
+        // 模組二功能
+        function runRiskAssessment() {
+            document.getElementById('riskDashboard').style.display = 'block';
+            alert('🔍 風險評估完成！\n\n評估結果：\n- 總供應商：156家\n- 高風險：12家 (7.7%)\n- 中風險：34家 (21.8%)\n- 低風險：110家 (70.5%)\n\n已生成詳細報告，請查看儀表板');
+        }
+
+        function showAnonymousReport() {
+            document.getElementById('anonymousReport').style.display = 'block';
+            alert('🔒 已進入匿名舉報系統\n\n所有舉報信息均已加密\n舉報人身份受到嚴格保護\n系統已自動啟動調查流程');
+        }
+
+        function generateAuditReport() {
+            alert('📄 審計報告已生成！\n\n報告包含：\n- 供應商人權合規狀況\n- 風險評估結果\n- 整改建議清單\n- 盡職調查證據鏈\n\n報告已上傳區塊鏈，不可篡改');
+        }
+
+        // 模組三功能
+        function calculateCarbon() {
+            document.getElementById('carbonDashboard').style.display = 'block';
+            alert('🧮 碳足跡計算完成！\n\n產品碳足跡：2.3 kg CO2e/件\n分解：\n- 原材料：35%\n- 紡紗織布：26%\n- 染色：22%\n- 製造：13%\n- 運輸：4%');
+        }
+
+        function showReductionPlan() {
+            document.getElementById('reductionPlan').style.display = 'block';
+            alert('💡 AI已生成減排方案！\n\n建議方案：\n1. 使用可再生能源 (減排11%)\n2. 優化物流路線 (減排2%)\n3. 採用有機染料 (減排6.5%)\n\n總體潛力：減排19.5%');
+        }
+
+        function generateCBAMReport() {
+            alert('📄 CBAM報告已生成！\n\n報告符合：\n- 歐盟CBAM要求 ✓\n- ISO14064標準 ✓\n- GHG Protocol ✓\n\n報告已準備好提交歐盟監管系統');
+        }
+
+        // 模組四功能
+        function checkCompliance() {
+            document.getElementById('complianceDashboard').style.display = 'block';
+            alert('🔍 合規檢查完成！\n\n檢查結果：\n- 檢查法規條目：156項\n- 風險警示：3項\n- 合規率：98%\n- 合規等級：A+\n\n請查看詳細報告');
+        }
+
+        function showRegulationUpdates() {
+            document.getElementById('regulationUpdates').style.display = 'block';
+            alert('📢 最新法規更新\n\n近期重要更新：\n1. 歐盟CSDDD實施細則 (5/20)\n2. 美國UFLPA實體清單更新 (5/15)\n3. CBAM報告要求調整 (5/10)\n\n請查看詳細內容及應對建議');
+        }
+
+        function generateCustomsDoc() {
+            alert('📄 清關文件已生成！\n\n文件清單：\n- 原產地證明書 (RCEP)\n- 商業發票\n- 裝箱單\n- 社會合規聲明\n- 碳足跡報告\n\n所有文件已加密上鏈，可一鍵下載');
+        }
+
+        // 頁面加載完成提示
+        window.onload = function() {
+            alert('👋 歡迎使用一站式供應鏈透明化治理平台演示系統\n\n請點擊上方標籤切換四大核心模組\n每個模組都包含互動演示功能');
+        };
+    </script>
+</body>
+</html>
