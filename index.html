@@ -6,7 +6,7 @@
     <meta name="description" content="一站式供應鏈透明化治理平台 - 提供原產地溯源、人權盡職調查、碳排放核算、貿易法規合規四大核心模組">
     <meta name="keywords" content="供應鏈，透明化，區塊鏈，碳足跡，ESG，合規，溯源">
     <meta name="author" content="Supply Chain Transparency Platform">
-    <title>SupplyChain+ | 供應鏈透明化治理平台</title>
+    <title>一站式供應鏈透明化治理平台 - 核心模組演示</title>
     
     <!-- 預載入關鍵資源 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,129 +16,33 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- 固定導覽列 -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <span class="logo-icon">🌐</span>
-                <span class="logo-text">SupplyChain+</span>
-            </div>
-            <ul class="navbar-menu">
-                <li><a href="#home" class="nav-link active">首頁</a></li>
-                <li><a href="#module1" class="nav-link">原產地溯源</a></li>
-                <li><a href="#module2" class="nav-link">人權盡職調查</a></li>
-                <li><a href="#module3" class="nav-link">碳排放核算</a></li>
-                <li><a href="#module4" class="nav-link">貿易法規合規</a></li>
-            </ul>
-            <button class="navbar-toggle" aria-label="選單切換">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 一站式供應鏈透明化治理平台</h1>
+            <p>四大核心模組互動演示系統</p>
+        </div>
+
+        <div class="module-tabs">
+            <button class="tab-btn active" onclick="showModule('module1')">
+                📍 模組一：原產地全生命週期溯源
+            </button>
+            <button class="tab-btn" onclick="showModule('module2')">
+                👥 模組二：供應鏈人權盡職調查
+            </button>
+            <button class="tab-btn" onclick="showModule('module3')">
+                🌱 模組三：全鏈路碳排放核算
+            </button>
+            <button class="tab-btn" onclick="showModule('module4')">
+                ⚖️ 模組四：全球貿易法規合規
             </button>
         </div>
-    </nav>
 
-    <!-- Hero Section / Landing 頁面 -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="highlight">供應鏈透明化</span>
-                <br>從源頭到終端的全面治理
-            </h1>
-            <p class="hero-subtitle">
-                整合區塊鏈、AI 與大數據技術，打造全球領先的供應鏈透明化治理平台
-            </p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">核心模組</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">合規率<span class="demo-tag">示範數據</span></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">156+</div>
-                    <div class="stat-label">供應商管理<span class="demo-tag">示範數據</span></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">數據可追溯</div>
-                </div>
+        <!-- 模組一：原產地溯源 -->
+        <div id="module1" class="module-content active">
+            <div class="module-header">
+                <h2>📍 原產地全生命週期溯源模塊</h2>
+                <p>從原材料開採到最終消費者的全鏈路不可篡改追溯</p>
             </div>
-            <div class="hero-cta">
-                <a href="#module1" class="btn btn-primary btn-large">探索核心功能</a>
-                <a href="#demo" class="btn btn-secondary btn-large">觀看演示影片</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="floating-card card-1">
-                <span class="card-icon">🔗</span>
-                <span>區塊鏈溯源</span>
-            </div>
-            <div class="floating-card card-2">
-                <span class="card-icon">👥</span>
-                <span>人權保護</span>
-            </div>
-            <div class="floating-card card-3">
-                <span class="card-icon">🌱</span>
-                <span>碳足跡追蹤</span>
-            </div>
-            <div class="floating-card card-4">
-                <span class="card-icon">⚖️</span>
-                <span>合規管理</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 平台價值主張 -->
-    <section class="value-proposition">
-        <div class="container">
-            <h2 class="section-title">為什麼選擇 SupplyChain+？</h2>
-            <div class="value-grid">
-                <div class="value-card">
-                    <div class="value-icon">🔍</div>
-                    <h3>端到端可視化</h3>
-                    <p>從原材料採購到最終消費者，全鏈路數據實時追蹤，打破供應鏈黑箱</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">🛡️</div>
-                    <h3>合規零風險</h3>
-                    <p>自動對接全球法規庫，實時預警合規風險，降低企業跨國貿易成本</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">🌍</div>
-                    <h3>永續發展</h3>
-                    <p>精準碳核算與減排方案，助力企業達成碳中和目標，履行社會責任</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon">💡</div>
-                    <h3>智能決策</h3>
-                    <p>AI 驅動風險識別與優化建議，讓供應鏈管理更智慧、更高效</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 核心模組演示區 -->
-    <section id="modules" class="modules-section">
-        <div class="container">
-            <h2 class="section-title">核心模組演示</h2>
-            <p class="section-subtitle">點擊下方模組查看詳細功能與互動演示</p>
-            
-            <!-- 模組一：原產地溯源 -->
-            <div class="accordion-item" id="module1">
-                <button class="accordion-header" onclick="toggleAccordion('module1')">
-                    <div class="accordion-title">
-                        <span class="module-icon">📍</span>
-                        <h3>原產地全生命週期溯源</h3>
-                    </div>
-                    <div class="accordion-summary">
-                        從原材料開採到最終消費者的全鏈路不可篡改追溯，確保產品來源真實可靠
-                    </div>
-                    <span class="accordion-toggle">▼</span>
-                </button>
-                <div class="accordion-content">
 
             <div class="demo-section">
                 <h3>核心功能演示</h3>
@@ -316,22 +220,14 @@
             <div class="alert alert-info">
                 <strong>💡 社會價值：</strong>杜絕原產地造假，維護市場公平競爭，保障消費者知情權，協助企業規避原產地不合規導致的關稅與禁令風險
             </div>
-                </div>
-            </div>
+        </div>
 
-            <!-- 模組二：人權盡職調查 -->
-            <div class="accordion-item" id="module2">
-                <button class="accordion-header" onclick="toggleAccordion('module2')">
-                    <div class="accordion-title">
-                        <span class="module-icon">👥</span>
-                        <h3>供應鏈人權盡職調查</h3>
-                    </div>
-                    <div class="accordion-summary">
-                        穿透供應鏈黑箱，守護勞工人權，杜絕強迫勞動與童工，符合全球人權監管要求
-                    </div>
-                    <span class="accordion-toggle">▼</span>
-                </button>
-                <div class="accordion-content">
+        <!-- 模組二：人權盡職調查 -->
+        <div id="module2" class="module-content">
+            <div class="module-header">
+                <h2>👥 供應鏈人權盡職調查與風險管理模塊</h2>
+                <p>穿透供應鏈黑箱，守護勞工人權，杜絕強迫勞動與童工</p>
+            </div>
 
             <div class="demo-section">
                 <h3>核心功能演示</h3>
