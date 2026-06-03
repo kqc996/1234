@@ -217,15 +217,99 @@
                 </div>
 
                 <div id="qrDisplay" style="display:none; text-align:center; margin-top:20px;">
-                    <h4>產品追溯QR Code</h4>
+                    <h4>產品追溯 QR Code</h4>
                     <div class="qr-code-demo">
-                        <div>
-                            <div style="font-size:3em;">📱</div>
-                            <div>掃描查詢完整溯源信息</div>
-                            <div style="font-size:0.8em; margin-top:10px;">TX-2026-0528-001</div>
-                        </div>
+                        <!-- SVG QR Code 示意圖 -->
+                        <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin:10px auto;">
+                            <!-- 背景 -->
+                            <rect width="200" height="200" fill="#fff" stroke="#ddd" stroke-width="2"/>
+                            
+                            <!-- 左上角定位方塊 -->
+                            <rect x="20" y="20" width="50" height="50" fill="#000"/>
+                            <rect x="28" y="28" width="34" height="34" fill="#fff"/>
+                            <rect x="36" y="36" width="18" height="18" fill="#000"/>
+                            
+                            <!-- 右上角定位方塊 -->
+                            <rect x="130" y="20" width="50" height="50" fill="#000"/>
+                            <rect x="138" y="28" width="34" height="34" fill="#fff"/>
+                            <rect x="146" y="36" width="18" height="18" fill="#000"/>
+                            
+                            <!-- 左下角定位方塊 -->
+                            <rect x="20" y="130" width="50" height="50" fill="#000"/>
+                            <rect x="28" y="138" width="34" height="34" fill="#fff"/>
+                            <rect x="36" y="146" width="18" height="18" fill="#000"/>
+                            
+                            <!-- 數據方塊 (模擬 QR Code 圖案) -->
+                            <rect x="90" y="20" width="8" height="8" fill="#000"/>
+                            <rect x="106" y="20" width="8" height="8" fill="#000"/>
+                            <rect x="122" y="20" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="36" width="8" height="8" fill="#000"/>
+                            <rect x="98" y="36" width="8" height="8" fill="#000"/>
+                            <rect x="114" y="36" width="8" height="8" fill="#000"/>
+                            <rect x="130" y="36" width="8" height="8" fill="#000"/>
+                            <rect x="74" y="52" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="52" width="8" height="8" fill="#000"/>
+                            <rect x="106" y="52" width="8" height="8" fill="#000"/>
+                            <rect x="122" y="52" width="8" height="8" fill="#000"/>
+                            <rect x="138" y="52" width="8" height="8" fill="#000"/>
+                            <rect x="74" y="68" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="68" width="8" height="8" fill="#000"/>
+                            <rect x="106" y="68" width="8" height="8" fill="#000"/>
+                            <rect x="122" y="68" width="8" height="8" fill="#000"/>
+                            <rect x="138" y="68" width="8" height="8" fill="#000"/>
+                            <rect x="20" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="36" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="52" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="68" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="84" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="100" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="116" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="132" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="148" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="164" y="90" width="8" height="8" fill="#000"/>
+                            <rect x="20" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="44" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="68" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="92" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="116" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="140" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="164" y="106" width="8" height="8" fill="#000"/>
+                            <rect x="20" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="36" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="60" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="84" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="108" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="132" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="156" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="180" y="122" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="106" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="122" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="138" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="154" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="170" y="140" width="8" height="8" fill="#000"/>
+                            <rect x="74" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="114" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="138" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="162" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="178" y="156" width="8" height="8" fill="#000"/>
+                            <rect x="74" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="90" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="106" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="122" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="138" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="154" y="172" width="8" height="8" fill="#000"/>
+                            <rect x="170" y="172" width="8" height="8" fill="#000"/>
+                            
+                            <!-- 中心 Logo -->
+                            <circle cx="100" cy="100" r="20" fill="#fff" stroke="#667eea" stroke-width="2"/>
+                            <text x="100" y="107" text-anchor="middle" font-size="16" fill="#667eea" font-weight="bold">SC</text>
+                        </svg>
                     </div>
-                    <p style="color:#666;">消費者掃描後可查看：原產地證明、生產過程、碳足跡、社會合規報告</p>
+                    <div style="margin-top:15px; font-weight:bold; color:#333;">TX-2026-0528-001</div>
+                    <p style="color:#666; margin-top:10px;">消費者掃描後可查看：原產地證明、生產過程、碳足跡、社會合規報告</p>
+                    <p style="font-size:0.85em; color:#999;">※ 此為示範 QR Code，實際產品將生成唯一追溯碼</p>
                 </div>
             </div>
 
@@ -284,7 +368,7 @@
                     
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="number">156</div>
+                            <div class="number">156</div><div class="demo-tag" style="display:inline-block;font-size:0.7em;padding:2px 6px;border-radius:4px;background:#ffeaa7;color:#d63031;margin-top:5px;">示範數據</div>
                             <div class="label">供應商總數</div>
                         </div>
                         <div class="stat-card">
@@ -296,7 +380,7 @@
                             <div class="label">中風險供應商</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number">98%</div>
+                            <div class="number">98%</div><div class="demo-tag" style="display:inline-block;font-size:0.7em;padding:2px 6px;border-radius:4px;background:#ffeaa7;color:#d63031;margin-top:5px;">示範數據</div>
                             <div class="label">合規率</div>
                         </div>
                     </div>
@@ -446,10 +530,10 @@
                         <div style="margin-bottom:10px;">
                             <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                                 <span>紡紗與織布</span>
-                                <span>0.6 kg CO2e (26%)</span>
+                                <span>0.35 kg CO2e (15%)</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width:26%">26%</div>
+                                <div class="progress-fill" style="width:15%">15%</div>
                             </div>
                         </div>
                         <div style="margin-bottom:10px;">
@@ -596,7 +680,7 @@
                     
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="number">156</div>
+                            <div class="number">156</div><div class="demo-tag" style="display:inline-block;font-size:0.7em;padding:2px 6px;border-radius:4px;background:#ffeaa7;color:#d63031;margin-top:5px;">示範數據</div>
                             <div class="label">法規條目檢查</div>
                         </div>
                         <div class="stat-card">
@@ -604,7 +688,7 @@
                             <div class="label">風險警示</div>
                         </div>
                         <div class="stat-card">
-                            <div class="number">98%</div>
+                            <div class="number">98%</div><div class="demo-tag" style="display:inline-block;font-size:0.7em;padding:2px 6px;border-radius:4px;background:#ffeaa7;color:#d63031;margin-top:5px;">示範數據</div>
                             <div class="label">合規率</div>
                         </div>
                         <div class="stat-card">
@@ -714,3 +798,53 @@
     <script src="js/app.js"></script>
 </body>
 </html>
+    <!-- 結尾 CTA 區塊 -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>想了解更多？</h2>
+                <p>立即預約產品演示，了解 SupplyChain+ 如何幫助您的企業實現供應鏈透明化治理</p>
+                <div class="cta-actions">
+                    <a href="mailto:demo@supplychain.example.com" class="btn btn-primary btn-large">📧 預約 Demo</a>
+                    <a href="mailto:info@supplychain.example.com" class="btn btn-secondary btn-large">✉️ 聯絡我們</a>
+                </div>
+                <div class="cta-contact">
+                    <p><strong>Email：</strong>demo@supplychain.example.com</p>
+                    <p><strong>電話：</strong>+886-2-1234-5678</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🌐</span>
+                    <span class="logo-text">SupplyChain+</span>
+                    <p>一站式供應鏈透明化治理平台</p>
+                </div>
+                <div class="footer-links">
+                    <h4>核心模組</h4>
+                    <ul>
+                        <li><a href="#module1">原產地溯源</a></li>
+                        <li><a href="#module2">人權盡職調查</a></li>
+                        <li><a href="#module3">碳排放核算</a></li>
+                        <li><a href="#module4">貿易法規合規</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>聯絡資訊</h4>
+                    <ul>
+                        <li><a href="mailto:demo@supplychain.example.com">預約 Demo</a></li>
+                        <li><a href="mailto:info@supplychain.example.com">一般諮詢</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SupplyChain+. All rights reserved.</p>
+                <p class="disclaimer">※ 本網站所有數據均為示範數據，僅供展示使用，不代表真實業務數據</p>
+            </div>
+        </div>
+    </footer>
